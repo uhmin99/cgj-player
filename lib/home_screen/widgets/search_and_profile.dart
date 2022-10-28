@@ -11,7 +11,9 @@ class SearchAndProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        Spacer(),
         _Search(),
+        Spacer(),
         _MyProfile(),
       ],
     );
@@ -21,14 +23,19 @@ class SearchAndProfile extends StatelessWidget {
 class _Search extends StatelessWidget {
   _Search({super.key});
 
+  final textFieldController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 300,
       color: Colors.grey,
+      // decoration: BoxDecoration(borderRadius: BorderRadius.circular(25)),
       child: Row(
         children: [
-          // TextField(),
+          // TextField(
+          //   controller: textFieldController,
+          // ),
           Icon(Icons.search)
         ],
       ),
@@ -47,6 +54,7 @@ class _MyProfile extends StatelessWidget {
         "https://picsum.photos/id/237/200/300",
         height: 30,
         width: 30,
+        fit: BoxFit.cover,
       )
     );
   }
