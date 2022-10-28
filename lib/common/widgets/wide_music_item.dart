@@ -14,6 +14,7 @@ class WideMusicItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
+      behavior: HitTestBehavior.opaque,
       child:Row(
         children: [
           Thumbnail(imageLink: imageLink, width: 47, height:47, borderRadius: 8, fitMethod: BoxFit.cover),
