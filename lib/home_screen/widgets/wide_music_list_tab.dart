@@ -22,7 +22,6 @@ class WideMusicListTab extends StatelessWidget {
         SizedBox(height: marginTop),  //margin top
 
         ListView.builder(
-          padding:EdgeInsets.only(left: 24, right: 33),
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
             return WideMusicItem(
