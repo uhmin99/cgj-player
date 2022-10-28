@@ -15,9 +15,15 @@ class HomeScreenState extends State<HomeScreen> {
   List<MusicItem> recentPlayList = [];
 
   void addToRecent(MusicItem musicItem) {
-    if(!recentPlayList.contains(musicItem)){
+    if(recentPlayList.contains(musicItem)){
       setState(() {
-        recentPlayList.add(musicItem);
+        recentPlayList.remove(musicItem);
+        recentPlayList.insert(0, musicItem);
+      });
+
+    } else {
+      setState(() {
+        recentPlayList.insert(0, musicItem);
       });
     }
   }
