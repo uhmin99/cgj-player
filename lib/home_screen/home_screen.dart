@@ -20,18 +20,15 @@ class HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             SearchAndProfile(),
-            SizedBox(height: 15),
 
             TabTitle(title: "PlayList"),
             PlayListTab(),
-            SizedBox(height: 15),
 
             TabTitle(title: "Recent Play"),
             RecentPlayTab(recentPlayList: recentPlayList,),
-            SizedBox(height: 25),
 
             TabTitle(title: "List"),
-            WideMusicListTab(musicList: musicList,),
+            WideMusicListTab(musicList: musicList, marginTop: 10, marginBottom: 10,),
           ],
         )
       )

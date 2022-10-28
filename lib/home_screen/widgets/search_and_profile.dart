@@ -1,7 +1,11 @@
 import "package:flutter/material.dart";
 
 class SearchAndProfile extends StatelessWidget {
-  SearchAndProfile({super.key});
+  SearchAndProfile({super.key, this.marginTop=0, this.marginBottom=0});
+
+  final double marginTop;
+  final double marginBottom;
+  
 
   @override
   Widget build(BuildContext context) {
