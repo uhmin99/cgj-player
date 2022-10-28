@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../common/classes.dart';
+import '../common/dummy_data.dart';
 import './widgets/home_screen_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  List<MusicItem> musicList = [MusicItem(1, "title", "artist", AudioLink(AudioLinkType.url, "testaudio"), "https://picsum.photos/id/237/200/300")];
+  List<MusicItem> musicList = dumyJazzData;
   List<MusicItem> recentPlayList = [];
 
   @override
