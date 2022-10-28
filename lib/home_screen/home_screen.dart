@@ -10,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  List<MusicItem> musicList = [];
+  List<MusicItem> musicList = [MusicItem(1, "title", "artist", AudioLink(AudioLinkType.url, "testaudio"), "https://picsum.photos/id/237/200/300")];
   List<MusicItem> recentPlayList = [];
 
   @override
@@ -18,6 +18,7 @@ class HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SearchAndProfile(),
 
@@ -28,10 +29,11 @@ class HomeScreenState extends State<HomeScreen> {
             RecentPlayTab(recentPlayList: recentPlayList,),
 
             TabTitle(title: "List"),
-            WideMusicListTab(musicList: musicList, marginTop: 10, marginBottom: 10,),
+            WideMusicListTab(musicList: musicList, marginTop: 20),
           ],
         )
-      )
+      ),
+      // backgroundColor: Color(0x003c3d49),
     );
   }
 }

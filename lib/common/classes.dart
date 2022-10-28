@@ -1,4 +1,5 @@
 class MusicItem {
+  int musicId;
   String title;
   String artist;
   AudioLink audioLink;
@@ -6,7 +7,7 @@ class MusicItem {
   double? playLengthSec;  //total length of music
   double? playedUntil;    //indicates that this music has been played until this seconds
 
-  MusicItem(this.title, this.artist, this.audioLink, this.imageUrl, [this.playedUntil = 0]);
+  MusicItem(this.musicId, this.title, this.artist, this.audioLink, this.imageUrl, [this.playedUntil = 0]);
 }
 
 enum AudioLinkType {url, asset}
