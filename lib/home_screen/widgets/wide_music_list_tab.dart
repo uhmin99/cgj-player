@@ -21,7 +21,7 @@ class WideMusicListTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(musicList.length == 0){
+    if(musicList.isEmpty){
       return Column(
         children: [
           SizedBox(height: marginTop),
