@@ -3,7 +3,6 @@ import "package:flutter/material.dart";
 import 'widgets/music_controller.dart';
 import 'widgets/music_image.dart';
 import 'widgets/music_info_text.dart';
-import 'widgets/music_slider.dart';
 import 'widgets/volume_controller.dart';
 
 class AudioPlayerScreen extends StatelessWidget {
@@ -18,13 +17,12 @@ class AudioPlayerScreen extends StatelessWidget {
         child: Column(
           children: [
             VolumeController(),
-            MusicImage(),
+            MusicImage(imageLink: music.imageLink),
             SizedBox(height: 15),
-            MusicInfoText(),
+            MusicInfoText(title: music.title, artist: music.artist,),
             SizedBox(height: 25),
-            MusicSlider(),
+            MusicController(music: music,),
             SizedBox(height: 20),
-            MusicController(),
           ],
         )
       )
