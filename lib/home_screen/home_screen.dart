@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../common/classes.dart';
 import './widgets/home_screen_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,6 +10,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
+  List<MusicItem> musicList = [];
+  List<MusicItem> recentPlayList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +27,11 @@ class HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 15),
 
             TabTitle(title: "Recent Play"),
-            RecentPlayTab(),
+            RecentPlayTab(recentPlayList: recentPlayList,),
             SizedBox(height: 25),
 
             TabTitle(title: "List"),
-            WideMusicListTab(),
+            WideMusicListTab(musicList: musicList,),
           ],
         )
       )

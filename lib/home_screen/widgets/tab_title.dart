@@ -7,6 +7,12 @@ class TabTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(title);
+    return Text(
+      title,
+      style: TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 25,
+      ),
+    );
   }
 }
