@@ -14,6 +14,14 @@ class HomeScreenState extends State<HomeScreen> {
   List<MusicItem> musicList = dumyJazzData;
   List<MusicItem> recentPlayList = [];
 
+  void addToRecent(MusicItem musicItem) {
+    if(!recentPlayList.contains(musicItem)){
+      setState(() {
+        recentPlayList.add(musicItem);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,16 +30,16 @@ class HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SearchAndProfile(),
+            SearchAndProfile(marginTop: 20, marginBottom: 30,),
 
             TabTitle(title: "PlayList"),
-            PlayListTab(),
+            PlayListTab(marginTop: 10, marginBottom: 25,),
 
             TabTitle(title: "Recent Play"),
             WideMusicListTab(musicList: recentPlayList, marginTop: 10, marginBottom: 30,),
 
             TabTitle(title: "List"),
-            WideMusicListTab(musicList: musicList, marginTop: 20),
+            WideMusicListTab(musicList: musicList, marginTop: 10, addToRecent: addToRecent),
           ],
         )
       ),

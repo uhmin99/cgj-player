@@ -5,37 +5,52 @@ import '../../common/widgets/wide_music_item.dart';
 
 class WideMusicListTab extends StatelessWidget {
 
-  WideMusicListTab({super.key, required this.musicList, this.marginTop=0, this.marginBottom=0});
+  WideMusicListTab({super.key, required this.musicList, this.marginTop=0, this.marginBottom=0, this.addToRecent});
 
   final List<MusicItem> musicList;
   final double marginBottom;
   final double marginTop;
+  final Function? addToRecent;
 
   void onTap(MusicItem musicItem, BuildContext context) {
+    if(addToRecent != null){
+      addToRecent!(musicItem);
+    }
     Navigator.push(context, MaterialPageRoute(builder: (context)=>AudioPlayerScreen(music: musicItem,)));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: marginTop),  //margin top
+    if(musicList.length == 0){
+      return Column(
+        children: [
+          SizedBox(height: marginTop),
+          Text("리스트가 없습니다."),
+          SizedBox(height: marginBottom),
+        ],
+      );
 
-        ListView.builder(
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) {
-            return WideMusicItem(
+    } else {
+      return Column(
+        children: [
+          SizedBox(height: marginTop),  //margin top
+
+          ListView.builder(
+            shrinkWrap: true,
+            itemBuilder: (BuildContext context, int index) {
+              return WideMusicItem(
                 imageLink: musicList[index].imageLink,
-              title: musicList[index].title,
-              artist: musicList[index].artist,
-              onTap:() => onTap(musicList[index], context),
-            );
-          },
-          itemCount: musicList.length,
-        ),
+                title: musicList[index].title,
+                artist: musicList[index].artist,
+                onTap:() => onTap(musicList[index], context),
+              );
+            },
+            itemCount: musicList.length,
+          ),
 
-        SizedBox(height: marginBottom), //margin bottom
-      ]
-    );
+          SizedBox(height: marginBottom), //margin bottom
+        ]
+      );
+    }
   }
 }

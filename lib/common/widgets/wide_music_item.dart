@@ -40,6 +40,7 @@ class _Texts extends StatelessWidget {
       margin: EdgeInsets.only(left: 18),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,

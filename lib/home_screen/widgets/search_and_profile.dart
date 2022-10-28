@@ -9,13 +9,21 @@ class SearchAndProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Spacer(),
-        _Search(),
-        Spacer(),
-        _MyProfile(),
-      ],
+    return Column(
+      children:[
+        SizedBox(height: marginTop,),
+
+        Row(
+          children: [
+            Spacer(),
+            _Search(),
+            Spacer(),
+            _MyProfile(),
+          ],
+        ),
+
+        SizedBox(height: marginBottom,)
+      ]
     );
   }
 }
