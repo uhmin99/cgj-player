@@ -28,7 +28,7 @@ class HomeScreenState extends State<HomeScreen> {
             PlayListTab(),
 
             TabTitle(title: "Recent Play"),
-            RecentPlayTab(recentPlayList: recentPlayList,),
+            WideMusicListTab(musicList: recentPlayList, marginTop: 10, marginBottom: 30,),
 
             TabTitle(title: "List"),
             WideMusicListTab(musicList: musicList, marginTop: 20),
