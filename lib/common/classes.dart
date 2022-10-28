@@ -3,18 +3,25 @@ class MusicItem {
   String title;
   String artist;
   AudioLink audioLink;
-  String imageUrl;
+  ImageLink imageLink;
   double? playLengthSec;  //total length of music
   double? playedUntil;    //indicates that this music has been played until this seconds
 
-  MusicItem(this.musicId, this.title, this.artist, this.audioLink, this.imageUrl, [this.playedUntil = 0]);
+  MusicItem(this.musicId, this.title, this.artist, this.audioLink, this.imageLink, [this.playedUntil = 0]);
 }
 
-enum AudioLinkType {url, asset}
+enum LinkType {url, asset}
 
 class AudioLink {
-  AudioLinkType type;
+  LinkType type;
   String link;
 
   AudioLink(this.type, this.link);
+}
+
+class ImageLink {
+  LinkType type;
+  String link;
+
+  ImageLink(this.type, this.link);
 }

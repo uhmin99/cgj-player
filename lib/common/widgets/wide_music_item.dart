@@ -1,10 +1,11 @@
+import "package:cgj_player/common/classes.dart";
 import "package:cgj_player/common/widgets/thumbnail.dart";
 import "package:flutter/material.dart";
 
 class WideMusicItem extends StatelessWidget {
-  WideMusicItem({super.key, required this.imgUrl, this.title="", this.artist="", this.onTap});
+  WideMusicItem({super.key, required this.imageLink, this.title="", this.artist="", this.onTap});
   
-  final String imgUrl;
+  final ImageLink imageLink;
   final String title;
   final String artist;
   final void Function()? onTap;
@@ -15,7 +16,7 @@ class WideMusicItem extends StatelessWidget {
       onTap: onTap,
       child:Row(
         children: [
-          Thumbnail(imgUrl: imgUrl, width: 47, height:47, borderRadius: 8, fitMethod: BoxFit.cover),
+          Thumbnail(imageLink: imageLink, width: 47, height:47, borderRadius: 8, fitMethod: BoxFit.cover),
           _Texts(title: title, artist: artist),
           Spacer(),
           _SettingButton(),

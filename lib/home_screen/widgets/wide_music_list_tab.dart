@@ -25,7 +25,7 @@ class WideMusicListTab extends StatelessWidget {
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
             return WideMusicItem(
-              imgUrl: musicList[index].imageUrl,
+                imageLink: musicList[index].imageLink,
               title: musicList[index].title,
               artist: musicList[index].artist,
               onTap:() => onTap(musicList[index], context),

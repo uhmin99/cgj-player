@@ -1,9 +1,10 @@
+import "package:cgj_player/common/classes.dart";
 import "package:flutter/material.dart";
 
 class Thumbnail extends StatelessWidget {
-  Thumbnail({super.key, required this.imgUrl, required this.width, required this.height, required this.borderRadius, this.fitMethod=BoxFit.contain,});
+  Thumbnail({super.key, required this.imageLink, required this.width, required this.height, required this.borderRadius, this.fitMethod=BoxFit.contain,});
 
-  final String imgUrl;
+  final ImageLink imageLink;
   final double width;
   final double height;
   final double borderRadius;
@@ -13,12 +14,23 @@ class Thumbnail extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-      child: Image.network(
-        imgUrl,
-        width: width,
-        height: height,
-        fit: fitMethod,
-      ),
+      child: 
+        (imageLink.type == LinkType.url)
+        ?
+          Image.network(
+            imageLink.link,
+            width: width,
+            height: height,
+            fit: fitMethod,
+          )
+        :
+          Image.asset(
+            imageLink.link,
+            width: width,
+            height: height,
+            fit: fitMethod,
+          )
+        ,
     );
   }
 }
