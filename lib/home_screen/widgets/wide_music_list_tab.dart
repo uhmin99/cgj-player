@@ -1,5 +1,7 @@
 import 'package:cgj_player/common/classes.dart';
+import 'package:cgj_player/music_player/audio_player_screen.dart';
 import "package:flutter/material.dart";
+import '../../common/widgets/wide_music_item.dart';
 
 class WideMusicListTab extends StatelessWidget {
 
@@ -9,8 +11,32 @@ class WideMusicListTab extends StatelessWidget {
   final double marginBottom;
   final double marginTop;
 
+  void onTap(MusicItem musicItem, BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>AudioPlayerScreen(music: musicItem,)));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Text("wide music list tab");
+    return Column(
+      children: [
+        SizedBox(height: marginTop),  //margin top
+
+        ListView.builder(
+          padding:EdgeInsets.only(left: 24, right: 33),
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) {
+            return WideMusicItem(
+              imgUrl: musicList[index].imageUrl,
+              title: musicList[index].title,
+              artist: musicList[index].artist,
+              onTap:() => onTap(musicList[index], context),
+            );
+          },
+          itemCount: musicList.length,
+        ),
+
+        SizedBox(height: marginBottom), //margin bottom
+      ]
+    );
   }
 }
