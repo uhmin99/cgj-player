@@ -16,6 +16,7 @@ class MusicController extends StatefulWidget {
 class MusicControllerState extends State<MusicController> {
 
   final audioPlayer = AudioPlayer();
+  late Future<Duration?> duration;
 
   @override
   void initState() {
@@ -23,11 +24,18 @@ class MusicControllerState extends State<MusicController> {
 
     //initialize audio player
     if(widget.music.audioLink.type == LinkType.asset){
-      audioPlayer.setAsset(widget.music.audioLink.link);
+      duration = audioPlayer.setAsset(widget.music.audioLink.link);
 
     } else if(widget.music.audioLink.type == LinkType.url){
-      audioPlayer.setUrl(widget.music.audioLink.link);
+      duration = audioPlayer.setUrl(widget.music.audioLink.link);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    audioPlayer.dispose();
   }
 
   void play() async {
@@ -91,7 +99,7 @@ class MusicControllerState extends State<MusicController> {
     return Column(
       children: [
         _ControllerButtons(play: play, pause: pause, jump: jumpSeconds,),
-        _MusicSlider(length: audioPlayer.duration, process: audioPlayer.positionStream, audioNavigate: audioNavigate,)
+        _MusicSlider(length: duration, process: audioPlayer.positionStream, audioNavigate: audioNavigate,)
       ],
     );
   }
@@ -205,7 +213,7 @@ class _ForwardButton extends StatelessWidget {
 class _MusicSlider extends StatefulWidget {
   const _MusicSlider({super.key, required this.length, required this.process, required this.audioNavigate});
 
-  final Duration? length;
+  final Future<Duration?>? length;
   final Stream<Duration> process;
   final Function audioNavigate;
 
@@ -216,17 +224,44 @@ class _MusicSlider extends StatefulWidget {
 class _MusicSliderState extends State<_MusicSlider> {
   @override
   Widget build(BuildContext context) {
-    print(widget.process);
-    return Slider(
-      value: 2,
-      onChanged: (v) {
-        widget.audioNavigate(v.toInt());
-      },
-      // max: widget.length!.inSeconds.toDouble(),
-      max: 10,
-      min: 0,
-      activeColor: Colors.red,
-      inactiveColor: Colors.white,
+    return StreamBuilder(
+      stream: widget.process,
+      builder: ((context, snapshotStream) {
+
+        if(snapshotStream.hasData){
+          return FutureBuilder(
+            future: widget.length,
+            builder: (context, snapshot) {
+              if(snapshot.hasData){
+                return Slider(
+                  value: snapshotStream.data!.inSeconds.toDouble(),
+                  onChanged: (v) {
+                    try {
+                      widget.audioNavigate(v.toInt());
+                      
+                    } catch (e) {
+                      print(e);
+                      print("[ERROR: error happened while navigation audio in music_controller]");
+                    }
+                  },
+                  // max: widget.length!.inSeconds.toDouble(),
+                  max: snapshot.data!.inSeconds.toDouble(),
+                  min: 0,
+                  activeColor: Colors.red,
+                  inactiveColor: Colors.white,
+                );
+
+              } else {
+                return Text("NO SONG");
+              }
+            },
+          );
+          
+        } else {
+          //no song to play
+          return Text("NO SONG");
+        }
+      }),
     );
   }
 }
